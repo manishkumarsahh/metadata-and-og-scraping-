@@ -35,68 +35,6 @@ app.get('/', function(req,res){
 })
 
 
-//after submitting form this is rendered
-app.post('/parse', async function(req,res){
-    try{
-
-        const pageName = req.body.pageName;
-
-        let resultArr = []
-        const response = await request({
-            uri: pageName,         //uri object where we want to make a request
-            gzip:true,
-        });
-    
-    
-        const $ = cheerio.load(response)
-    
-       
-        const title =  $('title').text()
-    
-     //list of images
-        let img = [];
-    
-         $("img").each((index, image)=>{
-            let val = $(image).attr('src');
-            img.push(val);
-            
-        });
-    
-        const description =  $('meta[name="description"]').attr('content');
-    
-      
-    
-        
-        let allOGList = [];
-    
-
-        //to read all the og meta data
-        $("meta[property^='og']").each((index, listOfOg)=>{
-    
-            let val = $(listOfOg).attr('content');
-    
-            allOGList.push(val);
-            
-        });
-    
-    
-    
-        
-        resultArr.push({
-            title,
-            description,
-            img,
-            allOGList
-            
-        });
-    
-        
-        return res.send(resultArr);
-    }catch(err){
-        res.send(err);
-    }
-
-});
 
 
 app.listen(port, function(err){
