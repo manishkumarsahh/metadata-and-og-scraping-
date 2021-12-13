@@ -8,7 +8,7 @@ Postman Colection Link-> https://www.getpostman.com/collections/5bcb6cd201efa32c
 
 -> n running the server it will open file index.html
 
--> Created form in file index.html with fields pageName and submit button.
+-> Created form in file index.html with fields pageName and submit button. 
 
 -> Method of form is POST request .
 
